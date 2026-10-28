@@ -1,4 +1,4 @@
-# 🚗 iCar Algeria — Microservices Car Platform
+# iCar Algeria — Microservices Car Platform
 
 ## Quick Start
 
@@ -16,10 +16,9 @@ docker compose up --build -d
 iCar Algeria is a microservices-based car marketplace backend built with Django REST Framework. Three independent services communicate asynchronously through RabbitMQ, with Consul handling service health monitoring and Traefik acting as the API gateway and load balancer.
 
 ---
-
 ## Architecture
 
-![diagram]([https://](github.com/OussamaBerredjem/MicroService-iCar-Platform/images)/diagram.png)
+![diagram](https://raw.githubusercontent.com/OussamaBerredjem/MicroService-iCar-Platform/main/images/diagram.png)
 
 ---
 
@@ -40,12 +39,12 @@ Each service runs **2 instances** for redundancy and load balancing.
 ### Gateway (Traefik)
 Traefik is the single entry point for all client requests. It reads healthy instances from Consul and automatically load balances traffic between them. If an instance goes down, Consul marks it unhealthy and Traefik stops routing to it within 30 seconds.
 
-![traefik](https://github.com/OussamaBerredjem/MicroService-iCar-Platform/images/diagram.png)
+![traefik](https://raw.githubusercontent.com/OussamaBerredjem/MicroService-iCar-Platform/main/images/traefik-1.png)
 
 ### Service Discovery (Consul)
 Each service instance registers itself in Consul with a shared service name (e.g. both `auth1` and `auth2` register as `auth`). Consul runs health checks every 30 seconds. Only passing instances are served to Traefik.
 
- ![rabbit](https://enchere-dz.com/aos/consul1.png)
+![consul](https://raw.githubusercontent.com/OussamaBerredjem/MicroService-iCar-Platforme/main/images/consul-1.png)
 
 ### Messaging (RabbitMQ)
 Services communicate asynchronously via RabbitMQ:
@@ -53,7 +52,7 @@ Services communicate asynchronously via RabbitMQ:
 - **Catalog consumer** listens and syncs user data
 - **Notification consumer** listens and sends notifications
 
-  ![rabbit](https://enchere-dz.com/aos/rabbitmq.png)
+![rabbitmq](https://raw.githubusercontent.com/OussamaBerredjem/iCar-MicroService/main/images/rabbitmq.png)
 
 This decouples services — no direct HTTP calls between them.
 
